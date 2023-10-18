@@ -1,4 +1,6 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rapid_reaction/app/resources/app_assets.dart';
 import 'package:rapid_reaction/app/resources/app_shared_prefs_keys.dart';
 import 'package:rapid_reaction/domain/entities/game_object.dart';
 import 'package:rapid_reaction/presentation/view_model/states.dart';
@@ -16,13 +18,17 @@ class GameCubit extends Cubit<GameState> {
   //VARIABLES
   late GameObject gameObject;
   List<int> hitsMsList = [];
-  int maxHits = 3;
+  int maxHits = 10;
   bool visible = false;
   bool get isGameOver => hitsMsList.length == maxHits;
+  final playerOnClick = AudioPlayer();
+  final playerOnShow = AudioPlayer();
 
   //EVENTS
   Future spawn(double screenHeight , double screenWidth) async {
     emit(GameLoadingState());
+    await playerOnClick.setSourceAsset(AppAssets.clickSound);
+    await playerOnShow.setSourceAsset(AppAssets.showSound);
     await Future.delayed(Duration(milliseconds: GameObject.getDelay()));
     gameObject = GameObject(screenHeight, screenWidth);
     showGameObject();
@@ -46,18 +52,22 @@ class GameCubit extends Cubit<GameState> {
     if(isGameOver) {
       final reactionResult= getReactionResult();
       await saveResults(reactionResult);
+      await playerOnShow.dispose();
+      await playerOnClick.dispose();
       navigatorKey.currentState?.pushReplacementNamed(AppRoutes.gameOverRoute,
           arguments: reactionResult);
     }
   }
 
-  void hideGameObject() {
+  Future hideGameObject() async {
     visible = false;
+    await playerOnClick.play(AssetSource(AppAssets.clickSound));
     emit(GameSuccessState());
   }
 
-  void showGameObject() {
+  Future showGameObject() async {
     visible = true;
+    await playerOnShow.play(AssetSource(AppAssets.showSound), volume: 0.6);
     emit(GameSuccessState());
   }
 
@@ -68,8 +78,8 @@ class GameCubit extends Cubit<GameState> {
 
   Future saveResults(ReactionResult reactionResult) async {
     final sharedPrefs = await SharedPreferences.getInstance();
-    final reactionHistory = sharedPrefs.get(
-        AppSharedPrefsKeys.reactionMsHistory) as List<String>? ?? [];
+    final reactionHistory = (sharedPrefs.get(AppSharedPrefsKeys.reactionMsHistory)
+    as List? ?? []).map((e) => "$e").toList();
     final newReactionHistory = ["${reactionResult.reactionSpeed}", ...reactionHistory];
     sharedPrefs.setStringList(AppSharedPrefsKeys.reactionMsHistory, newReactionHistory);
   }

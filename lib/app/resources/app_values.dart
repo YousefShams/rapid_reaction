@@ -5,5 +5,6 @@ class AppValues {
   static const verticalSpaceBetweenSections = 30.0;
   static const splashIconSize = 35.0;
   static const buttonPadding = 10.0;
+  static const buttonWidth = 200.0;
 
 }
