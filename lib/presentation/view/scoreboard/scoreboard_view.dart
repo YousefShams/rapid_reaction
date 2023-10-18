@@ -47,7 +47,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
             children: [
               const AppTitle(title: AppStrings.scoreboard),
               InfoItem(icon: Icons.star, title: AppStrings.bestScore,
-                  info: AppStrings.getTimeString(reactionsHistory.max)),
+                  info: AppStrings.getTimeString(reactionsHistory.min)),
               const SizedBox(height: AppValues.pagePadding),
               const AppTitle(title:AppStrings.lastGames),
               Expanded(

@@ -24,6 +24,7 @@ class ScoreItem extends StatelessWidget {
 
 
   String getIndexString(int index) {
-    return (index==1) ? "${index}st" : ((index==2) ? "${index}nd" : "${index}th");
+    return (index==1) ? "${index}st" : ((index==2) ? "${index}nd" :
+      ((index==3) ? "${index}rd" : "${index}th" ));
   }
 }
