@@ -18,11 +18,18 @@ class HitWidget extends StatelessWidget {
     const p = AppValues.pagePadding;
     const size = AppConsts.gameObjectSize;
     return Positioned(
-      top: max(0, y - p*2 - size*2),
-      left: max(0, x - p*2 - size*2),
+      top: max(0, y - p*2 - size),
+      left: max(0, x - p*2 - size),
       child: GestureDetector(
         onTap: () { onTap(); },
-        child: const CircleAvatar(radius: size, backgroundColor: AppColors.hitWidgetColor)
+        child: Container(
+            width: size, height: size,
+            decoration: BoxDecoration(
+              color: AppColors.hitWidgetColor,
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.white, width: 3)
+            ),
+        )
       )
     );
   }

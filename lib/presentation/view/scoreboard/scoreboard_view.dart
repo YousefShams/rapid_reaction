@@ -29,9 +29,9 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
 
   Future getReactionsHistory() async {
     final sharedPrefs = await SharedPreferences.getInstance();
-    final result=sharedPrefs.get(AppSharedPrefsKeys.reactionMsHistory) as List<String>? ?? [];
+    final result=sharedPrefs.get(AppSharedPrefsKeys.reactionMsHistory) as List? ?? [];
     setState(() {
-      reactionsHistory.addAll(result.map((e) => int.parse(e)).toList());
+      reactionsHistory.addAll(result.map((e) => int.parse("$e")).toList());
     });
   }
 
@@ -41,7 +41,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
       return Scaffold(
         appBar: getBackAppBar(context),
         body: Padding(
-          padding: const EdgeInsets.all(AppValues.pagePadding),
+          padding: const EdgeInsets.symmetric(horizontal: AppValues.pagePadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

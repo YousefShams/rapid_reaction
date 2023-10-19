@@ -1,6 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:rapid_reaction/app/extensions/extensions.dart';
 import 'package:rapid_reaction/app/resources/app_assets.dart';
 import 'package:rapid_reaction/app/resources/app_values.dart';
 
@@ -39,7 +38,7 @@ class _DefaultButtonState extends State<DefaultButton> {
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: AppValues.buttonPadding),
-              child: Text(widget.text, style:context.textTheme.bodyMedium),
+              child: Text(widget.text),
             )
         ),
       ),
@@ -47,8 +46,8 @@ class _DefaultButtonState extends State<DefaultButton> {
   }
 
   @override
-  void dispose() {
-    player.dispose();
+  Future dispose() async {
+    await player.dispose();
     super.dispose();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rapid_reaction/app/components/blur_animated_background.dart';
 import 'package:rapid_reaction/app/extensions/extensions.dart';
 import 'package:rapid_reaction/app/resources/app_values.dart';
 import 'package:rapid_reaction/presentation/view_model/cubit.dart';
@@ -17,20 +18,26 @@ class GameScreen extends StatelessWidget {
          var cubit = GameCubit.get(cubitContext);
          return (state is GameLoadingState) ? const Scaffold() :
          Scaffold(
-           body: Padding(
-             padding: const EdgeInsets.all(AppValues.pagePadding),
-             child: SizedBox(
-               height: context.height - AppValues.pagePadding*2,
-               width: context.width - AppValues.pagePadding*2,
-               child: Stack(
-                 children: [
-                   Visibility(
-                       visible: cubit.visible,
-                       child: cubit.gameObject.getWidget(cubit.onHit)
-                   )
-                 ],
+           body: Stack(
+             children: [
+               const BlurAnimation(),
+               Container(
+                 width: context.width, height: context.height,
+                 color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.7),
                ),
-             ),
+               Padding(
+                 padding: const EdgeInsets.all(AppValues.pagePadding),
+                 child: SizedBox(
+                   height: context.height - AppValues.pagePadding*2,
+                   width: context.width - AppValues.pagePadding*2,
+                   child: Stack(
+                     children: [
+                       cubit.gameObject.getWidget(cubit.onHit)
+                     ],
+                   ),
+                 ),
+               )
+             ],
            ),
          );
         },
