@@ -12,7 +12,7 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => GameCubit()..spawn(context.height, context.width),
+      create: (_) => GameCubit()..init(context.height, context.width),
       child: BlocBuilder<GameCubit, GameState>(
         builder: (cubitContext, state) {
          var cubit = GameCubit.get(cubitContext);

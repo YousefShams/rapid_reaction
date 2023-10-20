@@ -23,7 +23,9 @@ class MainMenuScreen extends StatelessWidget {
                 DefaultButton(onPressed: (){
                   Navigator.pushNamed(context, AppRoutes.gameRoute);
                 }, text: AppStrings.play),
-
+                DefaultButton(onPressed: (){
+                  Navigator.pushNamed(context, AppRoutes.gameModesRoute);
+                }, text: AppStrings.gameModes),
                 DefaultButton(text: AppStrings.scoreboard,
                   onPressed: (){ Navigator.pushNamed(context,AppRoutes.scoreboardRoute); }, ),
                 const Spacer(flex: 2),

@@ -11,6 +11,5 @@ class AppColors {
   static final lightPrimaryColor = Colors.indigoAccent[300];
   static const hitWidgetColor = Colors.blue;
   static final primaryColorDarker = Colors.blue[900];
-
-
+  static final defaultIconColor = AppColors.primaryColorDarker;
 }

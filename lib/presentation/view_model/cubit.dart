@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rapid_reaction/app/functions/functions.dart';
+import 'package:rapid_reaction/app/resources/app_enums.dart';
 import 'package:rapid_reaction/app/resources/app_shared_prefs_keys.dart';
 import 'package:rapid_reaction/domain/entities/game_object.dart';
 import 'package:rapid_reaction/presentation/view_model/states.dart';
@@ -14,36 +16,29 @@ class GameCubit extends Cubit<GameState> {
 
   //VARIABLES
   late GameObject gameObject;
-  int maxHits = 15;
+  late GameMode gameMode;
   updateUI(){ emit(GameSuccessState()); }
 
   //EVENTS
-  Future spawn(double screenHeight , double screenWidth) async {
+  Future init(double screenHeight , double screenWidth) async {
     emit(GameLoadingState());
-    gameObject = await GameObject.create(screenHeight, screenWidth, maxHits);
+    gameMode = await getGameMode();
+    gameObject = await GameObject.create(screenHeight, screenWidth,gameMode);
     emit(GameSuccessState());
   }
 
   Future onHit() async {
     await gameObject.hit(updateUI);
-
-    if(isGameOver()) {
-      await handleGameOver(isGameOver());
-    }
+    if(gameObject.isGameOver) await handleGameOver();
   }
 
-  bool isGameOver() {
-    return gameObject.hitsMsList.length == gameObject.maxHits;
-  }
 
-  Future handleGameOver(bool isGameOver) async {
-    if(isGameOver) {
-      final reactionResult= gameObject.getReactionResult();
-      await saveResults(reactionResult);
-      await gameObject.dispose();
-      navigatorKey.currentState?.pushReplacementNamed(AppRoutes.gameOverRoute,
-          arguments: reactionResult);
-    }
+  Future handleGameOver() async {
+    final reactionResult= gameObject.getReactionResult();
+    await saveResults(reactionResult);
+    await gameObject.dispose();
+    navigatorKey.currentState?.pushReplacementNamed(AppRoutes.gameOverRoute,
+        arguments: reactionResult);
   }
 
 
@@ -55,6 +50,12 @@ class GameCubit extends Cubit<GameState> {
     as List? ?? []).map((e) => "$e").toList();
     final newReactionHistory = ["${reactionResult.reactionSpeed}", ...reactionHistory];
     sharedPrefs.setStringList(AppSharedPrefsKeys.reactionMsHistory, newReactionHistory);
+  }
+
+  Future<GameMode> getGameMode() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final gameModeNumber= sharedPrefs.getInt(AppSharedPrefsKeys.currentGameMode);
+    return AppFunctions.getGameModeFromNumber(gameModeNumber ?? 0);
   }
 
   @override

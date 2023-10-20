@@ -1,6 +1,7 @@
 class AppStrings {
 
   static const play = "Play";
+  static const gameModes = "Game Modes";
   static const scoreboard = "Scoreboard";
   static const gameOver = "Game Complete";
   static const reactionSpeed = "Reaction Speed";
@@ -10,5 +11,9 @@ class AppStrings {
   static const bestScore = "Best Reaction";
   static const noScores = "No Scores to see yet";
   static const lastGames = "Last Games";
+  static const normalMode = "Normal Mode";
+  static const ninjaMode = "Ninja Mode";
+
+
   static String getTimeString(int ms) => "$ms Ms";
 }
