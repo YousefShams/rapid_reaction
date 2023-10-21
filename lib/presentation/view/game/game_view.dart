@@ -25,6 +25,10 @@ class GameScreen extends StatelessWidget {
                  width: context.width, height: context.height,
                  color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.7),
                ),
+               SizedBox(
+                 width: context.width, height: context.height,
+                 child: GestureDetector( onTap: () { cubit.onTapOutside(); } )
+               ),
                Padding(
                  padding: const EdgeInsets.all(AppValues.pagePadding),
                  child: SizedBox(

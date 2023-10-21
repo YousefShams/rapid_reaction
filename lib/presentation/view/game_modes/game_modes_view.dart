@@ -55,6 +55,12 @@ class _GameModesScreenState extends State<GameModesScreen> {
             GameModeButton(icon: Icons.touch_app, gameMode: GameMode.normal,
                 title: AppStrings.normalMode, onSelected: saveGameMode,
                 isSelected: currentGameMode==GameMode.normal),
+
+            GameModeButton(icon: Icons.air_rounded, gameMode: GameMode.rapid,
+                title: AppStrings.rapidMode, onSelected: saveGameMode,
+                isSelected: currentGameMode==GameMode.rapid,
+                iconColor: Colors.white,
+            ),
             GameModeButton(icon: Icons.flash_on, gameMode: GameMode.ninja,
                 iconColor: Colors.yellow,
                 title: AppStrings.ninjaMode, onSelected: saveGameMode,

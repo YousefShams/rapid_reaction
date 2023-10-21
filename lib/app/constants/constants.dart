@@ -9,5 +9,7 @@ class AppConsts {
   static const lowNinjaReactionTime = 500;
   static const highNinjaReactionTime = 2000;
   static const highNinjaReactionTimeNorm = highNinjaReactionTime-lowNinjaReactionTime;
+  static const normalModeMaxHits = 10;
+  static const rapidModeMaxHits = 15;
 
 }

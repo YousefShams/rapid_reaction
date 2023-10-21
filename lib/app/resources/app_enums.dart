@@ -1,2 +1,2 @@
 
-enum GameMode { normal, ninja }
+enum GameMode { normal, rapid, ninja }

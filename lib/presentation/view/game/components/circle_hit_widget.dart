@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:rapid_reaction/app/resources/app_colors.dart';
 import '../../../../app/resources/app_values.dart';
 
-class HitWidget extends StatelessWidget {
+class CircleHitWidget extends StatelessWidget {
   final double x;
   final double y;
   final Function onTap;
   final double size;
 
-  const HitWidget({Key? key, required this.x,
+  const CircleHitWidget({Key? key, required this.x,
     required this.y, required this.onTap,
     required this.size}) : super(key: key);
 

@@ -2,7 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapid_reaction/app/functions/functions.dart';
 import 'package:rapid_reaction/app/resources/app_enums.dart';
 import 'package:rapid_reaction/app/resources/app_shared_prefs_keys.dart';
-import 'package:rapid_reaction/domain/entities/game_object.dart';
+import 'package:rapid_reaction/domain/entities/base_game_object.dart';
+import 'package:rapid_reaction/domain/entities/game_object_factory.dart';
 import 'package:rapid_reaction/presentation/view_model/states.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../app/application/application.dart';
@@ -20,10 +21,10 @@ class GameCubit extends Cubit<GameState> {
   updateUI(){ emit(GameSuccessState()); }
 
   //EVENTS
-  Future init(double screenHeight , double screenWidth) async {
+  Future init(double sH , double sW) async {
     emit(GameLoadingState());
     gameMode = await getGameMode();
-    gameObject = await GameObject.create(screenHeight, screenWidth,gameMode);
+    gameObject = await GameObjectFactory().create(sH,sW,gameMode);
     emit(GameSuccessState());
   }
 
@@ -35,18 +36,19 @@ class GameCubit extends Cubit<GameState> {
 
   Future handleGameOver() async {
     final reactionResult= gameObject.getReactionResult();
-    await saveResults(reactionResult);
+    if(reactionResult!=null) await saveResults(reactionResult);
     await gameObject.dispose();
-    navigatorKey.currentState?.pushReplacementNamed(AppRoutes.gameOverRoute,
-        arguments: reactionResult);
+    navigatorKey.currentState?.pushReplacementNamed(
+        AppRoutes.gameOverRoute, arguments: reactionResult);
   }
 
-
-
+  Future onTapOutside() async {
+    if(!gameObject.allowTapOutside) await handleGameOver();
+  }
 
   Future saveResults(ReactionResult reactionResult) async {
     final sharedPrefs = await SharedPreferences.getInstance();
-    final reactionHistory = (sharedPrefs.get(AppSharedPrefsKeys.reactionMsHistory)
+    final reactionHistory= (sharedPrefs.get(AppSharedPrefsKeys.reactionMsHistory)
     as List? ?? []).map((e) => "$e").toList();
     final newReactionHistory = ["${reactionResult.reactionSpeed}", ...reactionHistory];
     sharedPrefs.setStringList(AppSharedPrefsKeys.reactionMsHistory, newReactionHistory);
