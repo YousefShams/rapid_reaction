@@ -30,16 +30,16 @@ class _DefaultButtonState extends State<DefaultButton> {
     return SizedBox(
       width: AppValues.buttonWidth,
       child: Padding(
-        padding: const EdgeInsets.all(AppValues.buttonPadding),
+        padding: const EdgeInsets.symmetric(vertical:AppValues.buttonPadding),
         child: FilledButton(
-            onPressed: () async {
-              await player.play(AssetSource(AppAssets.buttonClickSound));
-              widget.onPressed();
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppValues.buttonPadding),
-              child: Text(widget.text),
-            )
+          onPressed: () async {
+            await player.play(AssetSource(AppAssets.buttonClickSound));
+            widget.onPressed();
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: AppValues.buttonPadding),
+            child: Text(widget.text),
+          )
         ),
       ),
     );

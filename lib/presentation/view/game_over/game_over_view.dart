@@ -37,8 +37,19 @@ class GameOverScreen extends StatelessWidget {
                     info: AppStrings.getTimeString(reactionResult.worstReaction),
                     iconColor: Colors.redAccent),
                 const Spacer(flex: 2),
-                DefaultButton(text: AppStrings.done, onPressed: (){
-                  Navigator.pushNamed(context, AppRoutes.mainMenuRoute);})
+                Row(
+                  children: [
+                    Expanded(
+                      child: DefaultButton(text: AppStrings.restart, onPressed: (){
+                        Navigator.pushNamed(context, AppRoutes.gameRoute);}),
+                    ),
+                    const SizedBox(width: AppValues.pagePadding),
+                    Expanded(
+                      child: DefaultButton(text: AppStrings.done, onPressed: (){
+                        Navigator.pushNamed(context, AppRoutes.mainMenuRoute);}),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

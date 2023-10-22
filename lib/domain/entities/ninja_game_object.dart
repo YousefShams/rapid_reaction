@@ -10,12 +10,12 @@ import 'package:rapid_reaction/presentation/view/game/components/circle_hit_widg
 
 class NinjaGameObject extends GameObject {
 
-  double size = AppConsts.gameObjectSize;
+  double size = AppConsts.circleGameObjectSize;
 
   NinjaGameObject._create(super.screenHeight, super.screenWidth,
       super.playerOnClick, super.playerOnShow, super.lastSpawn,
       super.gameMode, super.clickSound, super.allowTapOutside,
-      super.showSound);
+      super.showSound, super.minDelayMs, super.maxDelayMs);
 
   static Future<NinjaGameObject> create(double h, double w,
       GameMode gameMode, String clickSound, String showSound) async {
@@ -23,7 +23,8 @@ class NinjaGameObject extends GameObject {
     final playerClick  = AudioPlayer()..setSourceAsset(clickSound);
     final playerShow = AudioPlayer()..setSourceAsset(showSound);
     final gameObj= NinjaGameObject._create(h,w,playerClick,playerShow,
-        lastSpawn, gameMode, clickSound, true, AppAssets.showNinja);
+        lastSpawn, gameMode, clickSound, true, AppAssets.showNinja,
+        AppConsts.minReactionDelayTime , AppConsts.maxReactionDelayTime);
     await gameObj.respawn();
     return gameObj;
   }
@@ -41,7 +42,8 @@ class NinjaGameObject extends GameObject {
   Widget getWidget(Function onTap) {
     return Visibility(
         visible: visible,
-        child: CircleHitWidget(x: x, y: y, size: size, onTap: onTap)
+        child: CircleHitWidget(x: x, y: y, size: size,
+            assetName: AppAssets.ninja, onTap: onTap)
     );
   }
 
@@ -50,13 +52,21 @@ class NinjaGameObject extends GameObject {
     final diffNorm = differenceMs - AppConsts.lowNinjaReactionTime;
     const highNorm = AppConsts.highNinjaReactionTimeNorm;
     final factor = min(max(0, 1.0 - (diffNorm/highNorm)) , 1);
-    final newSize = factor * AppConsts.gameObjectSize;
+    final newSize = factor * AppConsts.circleGameObjectSize;
     return newSize;
   }
 
   @override
   bool get isGameOver {
-    return size <= AppConsts.gameObjectSize*0.2;
+    const factor = AppConsts.minCircleGameObjectSizeFactor;
+    return size <=  factor * AppConsts.circleGameObjectSize;
+  }
+
+  @override
+  Color getReactionMsColor(int ms) {
+    if(ms < 700) { return Colors.green; }
+    else if(ms >= 700 && ms < 1000) { return Colors.orange; }
+    else { return Colors.red; }
   }
 
 }

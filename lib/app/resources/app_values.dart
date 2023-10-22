@@ -6,5 +6,5 @@ class AppValues {
   static const splashIconSize = 35.0;
   static const buttonPadding = 10.0;
   static const buttonWidth = 200.0;
-
+  static const circularProgressLineWidth = 2.0;
 }

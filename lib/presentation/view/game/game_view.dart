@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapid_reaction/app/components/blur_animated_background.dart';
 import 'package:rapid_reaction/app/extensions/extensions.dart';
 import 'package:rapid_reaction/app/resources/app_values.dart';
+import 'package:rapid_reaction/presentation/view/game/components/black_layer.dart';
 import 'package:rapid_reaction/presentation/view_model/cubit.dart';
 import '../../view_model/states.dart';
+import 'components/tap_outside_detector.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({Key? key}) : super(key: key);
@@ -21,14 +23,9 @@ class GameScreen extends StatelessWidget {
            body: Stack(
              children: [
                const BlurAnimation(),
-               Container(
-                 width: context.width, height: context.height,
-                 color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.7),
-               ),
-               SizedBox(
-                 width: context.width, height: context.height,
-                 child: GestureDetector( onTap: () { cubit.onTapOutside(); } )
-               ),
+               const BlackLayer(),
+               TapOutsideDetector(onTap : cubit.onTapOutside),
+               ...cubit.gameObject.scoreWidgets,
                Padding(
                  padding: const EdgeInsets.all(AppValues.pagePadding),
                  child: SizedBox(

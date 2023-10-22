@@ -19,7 +19,8 @@ class InfoItem extends StatelessWidget {
       leading: Icon(icon,color:  iconColor ?? AppColors.primaryColorDarker),
       title: Text(title, style: Theme.of(context).textTheme.bodyMedium?.copyWith(
           fontWeight: AppFonts.mediumFontWeight)),
-      trailing: Text(info, style: Theme.of(context).textTheme.titleMedium),
+      trailing: Text(info, style: Theme.of(context).textTheme.titleMedium
+          ?.copyWith(fontSize: AppFonts.biggerFontSize)),
     );
   }
 }

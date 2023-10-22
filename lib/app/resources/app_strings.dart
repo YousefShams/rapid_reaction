@@ -16,8 +16,7 @@ class AppStrings {
   static const rapidMode = "Rapid Mode";
   static const ninjaMode = "Ninja Mode";
   static const pressNow = "Press Now!";
+  static const restart = "Restart";
 
-
-
-  static String getTimeString(int ms) => "$ms Ms";
+  static String getTimeString(int ms) => "$ms MS";
 }

@@ -11,6 +11,7 @@ class AppFonts {
   static const double tinyFontSize = 12.0;
   static const double smallerFontSize = 14.0;
   static const double smallFontSize = 14.0;
+  static const double biggerFontSize = 15.0;
   static const double mediumFontSize = 16.0;
   static const double largeFontSize = 18.0;
   static const double xLFontSize = 20.0;

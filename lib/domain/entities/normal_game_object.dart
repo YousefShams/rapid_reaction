@@ -11,7 +11,7 @@ class NormalGameObject extends GameObject {
   NormalGameObject._create(super.screenHeight, super.screenWidth,
       super.playerOnClick, super.playerOnShow, super.lastSpawn,
       super.gameMode, super.clickSound, super.allowTapOutside,
-      super.showSound);
+      super.showSound, super.minDelayMs, super.maxDelayMs);
 
   static Future<NormalGameObject> create(double h, double w,
       GameMode gameMode, String clickSound) async {
@@ -19,7 +19,8 @@ class NormalGameObject extends GameObject {
     final playerClick  = AudioPlayer()..setSourceAsset(clickSound);
     final playerShow = AudioPlayer()..setSourceAsset(AppAssets.showSound);
     final gameObj= NormalGameObject._create(h,w,playerClick,playerShow,
-        lastSpawn, gameMode, clickSound, false, AppAssets.showSound);
+      lastSpawn, gameMode, clickSound, false, AppAssets.showSound,
+      AppConsts.minNormalDelayTime , AppConsts.maxNormalDelayTime);
     await gameObj.respawn();
     return gameObj;
   }
@@ -39,4 +40,10 @@ class NormalGameObject extends GameObject {
     if(!isGameOver) await respawn();
   }
 
+  @override
+  Color getReactionMsColor(int ms) {
+    if(ms < 350) { return Colors.green; }
+    else if(ms >= 350 && ms < 550) { return Colors.orange; }
+    else { return Colors.red; }
+  }
 }

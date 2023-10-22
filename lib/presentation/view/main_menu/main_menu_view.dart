@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rapid_reaction/app/components/app_title.dart';
 import 'package:rapid_reaction/app/components/default_button.dart';
+import 'package:rapid_reaction/app/resources/app_fonts.dart';
 import 'package:rapid_reaction/app/resources/app_strings.dart';
 import 'package:rapid_reaction/app/resources/app_values.dart';
 import 'package:rapid_reaction/app/routes/app_routes.dart';
@@ -18,7 +19,7 @@ class MainMenuScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const AppTitle(),
+                const AppTitle(fontSize: AppFonts.xXLFontSize,),
                 const Spacer(flex: 1),
                 DefaultButton(onPressed: (){
                   Navigator.pushNamed(context, AppRoutes.gameRoute);

@@ -18,6 +18,7 @@ class GameCubit extends Cubit<GameState> {
   //VARIABLES
   late GameObject gameObject;
   late GameMode gameMode;
+  int scoreMs = 0;
   updateUI(){ emit(GameSuccessState()); }
 
   //EVENTS
@@ -53,6 +54,7 @@ class GameCubit extends Cubit<GameState> {
     final newReactionHistory = ["${reactionResult.reactionSpeed}", ...reactionHistory];
     sharedPrefs.setStringList(AppSharedPrefsKeys.reactionMsHistory, newReactionHistory);
   }
+
 
   Future<GameMode> getGameMode() async {
     final sharedPrefs = await SharedPreferences.getInstance();
