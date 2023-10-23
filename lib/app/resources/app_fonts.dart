@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 class AppFonts {
-  static const fontFamily = "Poppins";
+  static const fontFamily = "Grandstander";
 
   static const lightFontWeight = FontWeight.w300;
   static const mediumFontWeight = FontWeight.w500;

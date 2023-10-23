@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rapid_reaction/presentation/view/game/game_view.dart';
 import 'package:rapid_reaction/presentation/view/game_modes/game_modes_view.dart';
 import 'package:rapid_reaction/presentation/view/game_over/game_over_view.dart';
+import 'package:rapid_reaction/presentation/view/how_to_play/view/how_to_play_view.dart';
 import 'package:rapid_reaction/presentation/view/main_menu/main_menu_view.dart';
 import 'package:rapid_reaction/presentation/view/scoreboard/scoreboard_view.dart';
 import 'package:rapid_reaction/presentation/view/splash/splash_view.dart';
@@ -16,6 +17,7 @@ class AppRoutes {
   static const gameModesRoute = "/game-modes";
   static const gameOverRoute = "/game-over";
   static const scoreboardRoute = "/scoreboard";
+  static const howToPlayRoute = "/howToPlay";
 
 
 
@@ -25,7 +27,8 @@ class AppRoutes {
     gameRoute : const GameScreen(),
     gameOverRoute : const GameOverScreen(),
     scoreboardRoute : const ScoreboardScreen(),
-    gameModesRoute : const GameModesScreen()
+    gameModesRoute : const GameModesScreen(),
+    howToPlayRoute : const HowToPlayScreen()
   };
 
   static Widget getScreenFromRoute(String? route) {

@@ -64,8 +64,8 @@ class NinjaGameObject extends GameObject {
 
   @override
   Color getReactionMsColor(int ms) {
-    if(ms < 700) { return Colors.green; }
-    else if(ms >= 700 && ms < 1000) { return Colors.orange; }
+    if(ms < 750) { return Colors.green; }
+    else if(ms >= 750 && ms < 900) { return Colors.orange; }
     else { return Colors.red; }
   }
 

@@ -71,6 +71,8 @@ flutter:
     - assets/
     - assets/audio/
     - assets/images/
+
+
   fonts:
     - family: Poppins
       fonts:
@@ -79,4 +81,14 @@ flutter:
         - asset: assets/fonts/Poppins-Medium.ttf
           weight: 500
         - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 300
+
+
+    - family: Grandstander
+      fonts:
+        - asset: assets/fonts/Grandstander-SemiBold.ttf
+          weight: 700
+        - asset: assets/fonts/Grandstander-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Grandstander-Regular.ttf
           weight: 300

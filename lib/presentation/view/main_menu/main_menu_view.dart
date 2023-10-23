@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rapid_reaction/app/components/app_title.dart';
 import 'package:rapid_reaction/app/components/default_button.dart';
-import 'package:rapid_reaction/app/resources/app_fonts.dart';
+import 'package:rapid_reaction/app/components/rapid_reaction_widget.dart';
 import 'package:rapid_reaction/app/resources/app_strings.dart';
 import 'package:rapid_reaction/app/resources/app_values.dart';
 import 'package:rapid_reaction/app/routes/app_routes.dart';
@@ -19,7 +18,7 @@ class MainMenuScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const AppTitle(fontSize: AppFonts.xXLFontSize,),
+                const RapidReactionWidget(),
                 const Spacer(flex: 1),
                 DefaultButton(onPressed: (){
                   Navigator.pushNamed(context, AppRoutes.gameRoute);
@@ -27,6 +26,9 @@ class MainMenuScreen extends StatelessWidget {
                 DefaultButton(onPressed: (){
                   Navigator.pushNamed(context, AppRoutes.gameModesRoute);
                 }, text: AppStrings.gameModes),
+                DefaultButton(onPressed: (){
+                  Navigator.pushNamed(context, AppRoutes.howToPlayRoute);
+                }, text: AppStrings.howToPlay),
                 DefaultButton(text: AppStrings.scoreboard,
                   onPressed: (){ Navigator.pushNamed(context,AppRoutes.scoreboardRoute); }, ),
                 const Spacer(flex: 2),

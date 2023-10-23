@@ -11,6 +11,6 @@ class AppAssets {
   static const bubbles = "$imagesPath/bubbles.json";
   static const cup = "$imagesPath/cup.json";
   static const target = "$imagesPath/target.svg";
-  static const ninja = "$imagesPath/ninja.svg";
+  static const ninja = "$imagesPath/ninja2.svg";
 
 }

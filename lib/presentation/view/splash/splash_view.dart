@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rapid_reaction/app/constants/constants.dart';
-import 'package:rapid_reaction/app/resources/app_colors.dart';
-import 'package:rapid_reaction/app/resources/app_values.dart';
 import 'package:rapid_reaction/app/routes/app_routes.dart';
-import '../../../app/components/app_title.dart';
+import '../../../app/components/rapid_reaction_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -27,14 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
               duration: const Duration(seconds: AppConsts.splashTime-1),
               child: widget,
             ),
-            child: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                AppTitle(),
-                Icon(Icons.touch_app_rounded, color: AppColors.primaryColor,
-                    size: AppValues.splashIconSize)
-              ],
-            ),
+            child: const RapidReactionWidget(),
         ),
       ),
     );

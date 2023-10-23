@@ -1,6 +1,9 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:rapid_reaction/app/extensions/extensions.dart';
 import 'package:rapid_reaction/app/resources/app_assets.dart';
+import 'package:rapid_reaction/app/resources/app_colors.dart';
+import 'package:rapid_reaction/app/resources/app_fonts.dart';
 import 'package:rapid_reaction/app/resources/app_values.dart';
 
 class DefaultButton extends StatefulWidget {
@@ -27,8 +30,15 @@ class _DefaultButtonState extends State<DefaultButton> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: AppValues.buttonWidth,
+      height: AppValues.buttonHeight,
+      margin: const EdgeInsets.only(bottom: AppValues.pagePadding),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(1000),
+        boxShadow: [BoxShadow(color: AppColors.primaryColorDarker!.withOpacity(0.3),
+        offset: const Offset(5, 9), spreadRadius: 0)]
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical:AppValues.buttonPadding),
         child: FilledButton(
@@ -38,7 +48,9 @@ class _DefaultButtonState extends State<DefaultButton> {
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: AppValues.buttonPadding),
-            child: Text(widget.text),
+            child: Text(widget.text, style: context.textTheme.bodyMedium?.copyWith(
+              fontSize: AppFonts.biggerFontSize)
+            ),
           )
         ),
       ),

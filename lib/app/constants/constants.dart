@@ -9,11 +9,12 @@ class AppConsts {
   static const maxReactionDelayTime = 3000;
   static const minNormalDelayTime = 1000;
   static const maxNormalDelayTime = 6000;
-  static const lowNinjaReactionTime = 700;
-  static const highNinjaReactionTime = 1500;
+  static const lowNinjaReactionTime = 650;
+  static const highNinjaReactionTime = 1300;
   static const highNinjaReactionTimeNorm = highNinjaReactionTime-lowNinjaReactionTime;
   static const normalModeMaxHits = 10;
   static const rapidModeMaxHits = 15;
+  static const scoreAnimationDuration = 320;
   static final percentIndicatorMs = ((1 - minCircleGameObjectSizeFactor)*
       highNinjaReactionTimeNorm).ceil() + lowNinjaReactionTime;
 
