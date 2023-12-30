@@ -4,8 +4,8 @@ import 'package:rapid_reaction/app/components/blur_animated_background.dart';
 import 'package:rapid_reaction/app/extensions/extensions.dart';
 import 'package:rapid_reaction/app/resources/app_values.dart';
 import 'package:rapid_reaction/presentation/view/game/components/black_layer.dart';
-import 'package:rapid_reaction/presentation/view_model/cubit.dart';
-import '../../view_model/states.dart';
+import 'package:rapid_reaction/presentation/view_model/game_view_model/cubit.dart';
+import '../../view_model/game_view_model/states.dart';
 import 'components/tap_outside_detector.dart';
 
 class GameScreen extends StatelessWidget {

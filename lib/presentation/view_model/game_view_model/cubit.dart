@@ -1,14 +1,15 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapid_reaction/app/functions/functions.dart';
 import 'package:rapid_reaction/app/resources/app_enums.dart';
 import 'package:rapid_reaction/app/resources/app_shared_prefs_keys.dart';
 import 'package:rapid_reaction/domain/entities/base_game_object.dart';
 import 'package:rapid_reaction/domain/entities/game_object_factory.dart';
-import 'package:rapid_reaction/presentation/view_model/states.dart';
+import 'package:rapid_reaction/presentation/view_model/game_view_model/states.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../app/application/application.dart';
-import '../../app/routes/app_routes.dart';
-import '../../domain/entities/reaction_result.dart';
+import '../../../app/application/application.dart';
+import '../../../app/routes/app_routes.dart';
+import '../../../domain/entities/reaction_result.dart';
 
 class GameCubit extends Cubit<GameState> {
   GameCubit() : super(GameInitialState());
@@ -24,6 +25,7 @@ class GameCubit extends Cubit<GameState> {
   //EVENTS
   Future init(double sH , double sW) async {
     emit(GameLoadingState());
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     gameMode = await getGameMode();
     gameObject = await GameObjectFactory().create(sH,sW,gameMode);
     emit(GameSuccessState());
@@ -64,6 +66,8 @@ class GameCubit extends Cubit<GameState> {
 
   @override
   Future<void> close() async {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+      SystemUiOverlay.bottom, SystemUiOverlay.top]);
     await gameObject.dispose();
     super.close();
   }
